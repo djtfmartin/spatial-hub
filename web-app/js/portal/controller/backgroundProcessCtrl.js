@@ -11,6 +11,9 @@
 
                 $scope.step = $rootScope.getValue($scope.name, 'step', 0);
 
+                $scope.stage = inputData && inputData.stage || 'input'
+                $scope.taskId = inputData && inputData.taskId
+
                 $rootScope.addToSave($scope)
 
                 $scope.status = ''
@@ -95,7 +98,6 @@
                 };
 
                 $scope.ok = function (data) {
-
                     if ($scope.stepsCurrent == 0) {
                         var sNames = []
 
@@ -176,6 +178,18 @@
                         $scope.step = $scope.step + 1
                     }
                     $scope.stepsCurrent = $scope.stepsCurrent + 1
+
+                    switch ($scope.stage){
+                        case 'input':
+                            break;
+                        case 'output':
+                            if($scope.taskId) {
+                                $scope.statusUrl = LayersService.url() + '/tasks/status/' + $scope.taskId
+                                $scope.step = $scope.steps + 1
+                                $scope.checkStatus()
+                            }
+                            break;
+                    }
                 };
 
                 $scope.finished = false
