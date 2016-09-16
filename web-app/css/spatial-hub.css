@@ -257,7 +257,7 @@ form input[type=checkbox] {
 .leaflet-quick-links-text{
     white-space: nowrap;
     max-width: 100px;
-    overflow: hidden;              /* "overflow" value must be different from "visible" */
+    overflow: hidden;
     text-overflow: ellipsis;
     display:inline-block;
     vertical-align: middle;
@@ -284,3 +284,32 @@ ol.leaflet-quick-links li {
     padding-top: 5px;
 }
 /** playback css end **/
+
+/** lists list **/
+.table-text-ellipsis{
+    white-space: nowrap;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table > tbody > tr > td.td-vertical-align {
+    vertical-align: middle;
+}
+/** lists list end **/
+
+/** select species **/
+
+.padding-bottom-15 {
+    padding-bottom: 15px;
+}
+
+#speciesAutoComplete{
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.margin-top-8{
+    margin-top: 8px;
+}
+/** select species END **/

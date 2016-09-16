@@ -1,47 +1,60 @@
-<div class="container">
-    <form>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                <input type="text" class="form-control" placeholder="Search Dataset" ng-model="searchSandbox">
-            </div>
-        </div>
-    </form>
-
+<div class="">
     <div>
-        <table class="table table-bordered table-striped">
-            <thead style="display:block">
+        <table class="table table-bordered">
+            <caption>
+                <div class="row">
+                    <div class="col-sm-6 margin-top-8">
+                        Imported datasets
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Dataset" ng-model="searchSandbox">
+                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </caption>
+            <thead>
             <tr>
-                <td></td>
-                <td>
+                <td class="col-sm-1"></td>
+                <td class="col-sm-6">
                     <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                        name
+                        Name
                         <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                     </a></td>
-                <td><a href="#" ng-click="sortType = 'updated'; sortReverse = !sortReverse">
-                    last updated
+                <td class="col-sm-2"><a href="#" ng-click="sortType = 'updated'; sortReverse = !sortReverse">
+                    Last updated
                     <span ng-show="sortType == 'updated' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'updated' && sortReverse" class="fa fa-caret-up"></span>
                 </a></td>
-                <td>
+                <td class="col-sm-3">
                     <a href="#" ng-click="sortType = 'count'; sortReverse = !sortReverse">
-                        number of records
+                        Number of records
                         <span ng-show="sortType == 'count' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'count' && sortReverse" class="fa fa-caret-up"></span>
                     </a></td>
             </tr>
             </thead>
-            <tbody style="height:300px;overflow:scroll;display:block">
-            <tr ng-repeat="item in sandboxItems | orderBy:sortType:sortReverse | filter:searchSandbox">
-                <td><input type="checkbox" ng-model="item.selected" ng-click="select(item)"></td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.lastUpdated }}</td>
-                <td>{{ item.numberOfRecords }}</td>
+            <tbody>
+            <tr>
+                <td colspan="4">
+                    <div style="height:300px;overflow-y:auto;">
+                    <table class="table">
+                        <tbody >
+                        <tr ng-repeat="item in sandboxItems | orderBy:sortType:sortReverse | filter:searchSandbox">
+                            <td class="col-sm-1 td-vertical-align text-center"><input type="checkbox" ng-model="item.selected" ng-click="select(item)"></td>
+                            <td class="col-sm-6 td-vertical-align table-text-ellipsis"  title="{{item.name}}">{{ item.name }}</td>
+                            <td class="col-sm-2 td-vertical-align table-text-ellipsis" >{{ item.lastUpdated | date: short}}</td>
+                            <td class="col-sm-3 td-vertical-align  text-center">{{ item.numberOfRecords }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>
-
         <div class="col-md-12 text-center">
             <ul class="pagination pagination-lg pager" id="myPager"></ul>
         </div>

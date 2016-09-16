@@ -3,14 +3,14 @@
 </div>
 
 <div class="modal-body">
-    <div class="row">
-        <div class="col-md-2">
+    <div class="">
+        <div ng-class="{'col-md-2': stepNames && stepNames.length}">
             <ol class="stepList" style="margin-left:-20px;">
                 <li style="font-size:12px" ng-repeat="stepName in stepNames"><span>{{stepName}}&nbsp;</span><i
                         class="glyphicon glyphicon-ok" ng-show="step > $index + 1"></i></li>
             </ol>
         </div>
-        <div class="col-md-10">
+        <div ng-class="{'col-md-10': stepNames && stepNames.length, 'col-md-12': !(stepNames && stepNames.length)}">
             <form class="form-horizontal">
                 <div ng-show="step == '1'">
                     <div select-species on-custom="setQ" selected-q="selectedQ"></div>
