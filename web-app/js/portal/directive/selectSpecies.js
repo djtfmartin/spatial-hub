@@ -129,6 +129,7 @@
                                 })
                             } else if (scope.speciesOption == 'searchSpecies') {
                                 scope.clearQ()
+                                scope.focusOnAutocomplete()
                             } else if (scope.speciesOption == 'importList') {
                                 scope.clearQ()
                                 scope.openSpeciesList()
@@ -149,6 +150,14 @@
 
 
                         }
+
+                        scope.focusOnAutocomplete = function () {
+                            $timeout(function () {
+                                $("#speciesAutoComplete").focus()
+                            }, 0)
+                        }
+
+                        scope.focusOnAutocomplete()
                     }
                 }
 

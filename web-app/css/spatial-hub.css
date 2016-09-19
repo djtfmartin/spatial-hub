@@ -170,10 +170,6 @@ form input[type=checkbox] {
     margin-right: 10px;
 }
 
-.red-text {
-    color: red
-}
-
 .bk-red {
     background-color: red
 }
@@ -313,3 +309,9 @@ table > tbody > tr > td.td-vertical-align {
     margin-top: 8px;
 }
 /** select species END **/
+
+/** select layer **/
+img.ala-layer-type-icon {
+    margin: 0px 0px 0px 0px;
+}
+/** select layer END **/
