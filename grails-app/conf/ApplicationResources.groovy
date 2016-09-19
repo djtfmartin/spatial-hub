@@ -126,7 +126,6 @@ modules = {
         resource url: [dir: 'js/portal/directive', file: 'speciesAutoComplete.js']
         resource url: [dir: 'js/portal/directive', file: 'quickLinks.js']
         resource url: [dir: 'js/portal/directive', file: 'playback.js']
-        resource url: [dir: 'js/portal/directive', file: 'checkbox.js']
 
         resource url: [dir: 'js/portal/service', file: 'biocacheService.js']
         resource url: [dir: 'js/portal/service', file: 'facetAutocompleteService.js']

@@ -72,7 +72,7 @@
 }
 
 label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -315,3 +315,7 @@ img.ala-layer-type-icon {
     margin: 0px 0px 0px 0px;
 }
 /** select layer END **/
+
+.padding-bottom-5{
+    padding-bottom: 5px;
+}

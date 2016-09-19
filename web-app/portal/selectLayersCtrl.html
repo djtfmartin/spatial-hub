@@ -1,155 +1,186 @@
-<div class="row padding-bottom-15">
-    <div class="col-sm-12">
-        <p>Select from the following options</p>
-        <div class="btn-group">
-            <label class="btn btn-default" ng-model="mode" uib-btn-radio="''">Search layers</label>
-            <label class="btn btn-default" ng-model="mode" uib-btn-radio="'pasteLayers'">Paste a layer set</label>
-            <label class="btn btn-default" ng-model="mode" uib-btn-radio="'uploadLayers'">Upload a layer set</label>
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="row padding-bottom-15">
+            <div class="col-sm-12">
+                <p>Select from the following options</p>
+                <div class="btn-group">
+                    <label class="btn btn-default" ng-model="mode" uib-btn-radio="''">Search layers</label>
+                    <label class="btn btn-default" ng-model="mode" uib-btn-radio="'pasteLayers'">Paste a layer
+                        set</label>
+                    <label class="btn btn-default" ng-model="mode" uib-btn-radio="'uploadLayers'">Upload a layer
+                        set</label>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="container">
-                    <div class="row" ng-show="mode == 'uploadLayers'">
-                        <p>Upload a layer set file. <small>(The layer sets use layer 'short name': see <a
-                                href="${config.layersService.url}/layers" target="_blank">layers</a></small>)</p>
-                        <div class="col-sm-8">
-                            <input type="file" id="file" name="file"/>
-                        </div>
-                        <div class="col-sm-4">
-                            <button class="btn btn-primary" ng-click="upload()">Upload</button>
-                            <button class="btn btn-default" ng-click="mode = ''">Cancel</button>
-                        </div>
-                    </div>
-
-                    <div class="row" ng-show="mode == 'pasteLayers'">
-                        <p>Paste a coma separated layer list. <small>(The layer sets use layer 'short name': see <a
-                                href="${config.layersService.url}/layers" target="_blank">layers</a>)</small></p>
-
-                        <div class="col-sm-12">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <textarea ng-model="pasteLayersTxt" style="height:200px;width:90%" name="pasteLayers"></textarea>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="container">
+                            <div class="row" ng-show="mode == 'uploadLayers'">
+                                <p>Upload a layer set file.
+                                    <small>(The layer sets use layer 'short name': see <a
+                                            href="${config.layersService.url}/layers" target="_blank">layers</a></small>
+                                    )
+                                </p>
+                                <div class="col-sm-8">
+                                    <input type="file" id="file" name="file"/>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button class="btn btn-primary" ng-click="addList(pasteLayersTxt);mode = ''">Add</button>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary" ng-click="upload()">Upload</button>
                                     <button class="btn btn-default" ng-click="mode = ''">Cancel</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div ng-show="mode == ''">
-                        <div class="row">
-                            <div class="form-group">
+                            <div class="row" ng-show="mode == 'pasteLayers'">
+                                <p>Paste a coma separated layer list.
+                                    <small>(The layer sets use layer 'short name': see <a
+                                            href="${config.layersService.url}/layers" target="_blank">layers</a>)
+                                    </small>
+                                </p>
 
-                                <div class="input-group" style="display:none">
-                                    <div class="input-group-addon"><i class="fa fa-search"></i>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <textarea ng-model="pasteLayersTxt" style="height:200px;width:90%"
+                                                      name="pasteLayers"></textarea>
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Search Layers" ng-model="searchLayer">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-primary"
+                                                    ng-click="addList(pasteLayersTxt);mode = ''">Add
+                                            </button>
+                                            <button class="btn btn-default" ng-click="mode = ''">Cancel</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <p>Select one or more layers from list, search result or predefined layer set.</p>
-                                <table class="table table-bordered table-striped">
-                                    <caption>
-                                        <div class="row">
-                                            <div class="col-sm-6 margin-top-8">
-                                                Layer list
+                            <div ng-show="mode == ''">
+                                <div class="row">
+                                    <div class="form-group">
+
+                                        <div class="input-group" style="display:none">
+                                            <div class="input-group-addon"><i class="fa fa-search"></i>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Filter layer list"
-                                                           ng-model="searchLayer">
-                                                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                                                </div>
-                                            </div>
+                                            <input type="text" class="form-control" placeholder="Search Layers"
+                                                   ng-model="searchLayer">
                                         </div>
-                                    </caption>
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 20px"></th>
-                                        <th style="width: 20px"></th>
-                                        <th class="col-sm-5">
-                                            <a href="#" ng-click="sortType = 'classification'; sortReverse = !sortReverse">
-                                                Classification
+                                    </div>
+
+                                    <div>
+                                        <p>Select one or more layers from list, search result or predefined layer
+                                            set.</p>
+                                        <table class="table table-bordered table-striped">
+                                            <caption>
+                                                <div class="row">
+                                                    <div class="col-sm-6 margin-top-8">
+                                                        Layer list
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Filter layer list"
+                                                                   ng-model="searchLayer">
+                                                            <div class="input-group-addon"><i class="fa fa-search"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </caption>
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 20px"></th>
+                                                <th style="width: 20px"></th>
+                                                <th class="col-sm-5">
+                                                    <a href="#"
+                                                       ng-click="sortType = 'classification'; sortReverse = !sortReverse">
+                                                        Classification
                             <span ng-show="sortType == 'classification' && !sortReverse"
                                   class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'classification' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                                            </a></th>
-                                        <th class="col-sm-5">
-                                            <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                                                Name
-                                                <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                                                <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-                                            </a></th>
-                                        <th class="col-sm-1">
-                                        </td>
-                                        <th class="col-sm-1"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody style="overflow:scroll;">
-                                    <td colspan="6">
-                                        <div style="overflow-y: auto; height:300px">
-                                            <table class="table" style="table-layout:fixed">
-                                                <tbody style="height:300px;overflow:scroll;">
-                                                <tr ng-repeat="layer in layers | orderBy:sortType:sortReverse | filter:searchLayer">
-                                                    <td style="width: 15px" class="td-vertical-align"><input type="checkbox"
-                                                                                                             ng-checked="layer.selected"
-                                                                                                             ng-click="toggle(layer)">
-                                                    </td>
-                                                    <td style="width: 15px" class="td-vertical-align"><img
-                                                            class="ala-layer-type-icon"
-                                                            ng-src="images/icon_{{layer.type == 'e' ? 'grid':'contextual'}}-layer.png">
-                                                    </td>
-                                                    <td class="col-sm-5 table-text-ellipsis td-vertical-align"
-                                                        title="{{ layer.classification}}">{{ layer.classification}}
-                                                    </td>
-                                                    <td class="col-sm-5 table-text-ellipsis td-vertical-align"
-                                                        title="{{ layer.name }}">{{ layer.name }}
-                                                    </td>
-                                                    <td class="col-sm-1 text-center td-vertical-align" ng-click="info(layer)"><i
-                                                            class="glyphicon glyphicon-info-sign"></i></td>
-                                                    <td class="col-sm-1 td-vertical-align" ng-class="{'bk-green':layer.dist <= 0.1, 'bk-yellow' : (layer.dist > 0.1) && (layer.dist <= 0.3), 'bk-red': (layer.dist > 0.3) && (layer.dist <= 1), 'bk-white': (layer.dist > 1)}">
-                                                        &nbsp
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </td>
-                                    </tbody>
-                                </table>
+                                                    </a></th>
+                                                <th class="col-sm-5">
+                                                    <a href="#"
+                                                       ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                                                        Name
+                                                        <span ng-show="sortType == 'name' && !sortReverse"
+                                                              class="fa fa-caret-down"></span>
+                                                        <span ng-show="sortType == 'name' && sortReverse"
+                                                              class="fa fa-caret-up"></span>
+                                                    </a></th>
+                                                <th class="col-sm-1">
+                                                </td>
+                                                <th class="col-sm-1"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody style="overflow:scroll;">
+                                            <td colspan="6">
+                                                <div style="overflow-y: auto; height:300px">
+                                                    <table class="table" style="table-layout:fixed">
+                                                        <tbody style="height:300px;overflow:scroll;">
+                                                        <tr ng-repeat="layer in layers | orderBy:sortType:sortReverse | filter:searchLayer">
+                                                            <td style="width: 15px" class="td-vertical-align"><input
+                                                                    type="checkbox"
+                                                                    ng-checked="layer.selected"
+                                                                    ng-click="toggle(layer)">
+                                                            </td>
+                                                            <td style="width: 15px" class="td-vertical-align"><img
+                                                                    class="ala-layer-type-icon"
+                                                                    ng-src="images/icon_{{layer.type == 'e' ? 'grid':'contextual'}}-layer.png">
+                                                            </td>
+                                                            <td class="col-sm-5 table-text-ellipsis td-vertical-align"
+                                                                title="{{ layer.classification}}">{{
+                                                                layer.classification}}
+                                                            </td>
+                                                            <td class="col-sm-5 table-text-ellipsis td-vertical-align"
+                                                                title="{{ layer.name }}">{{ layer.name }}
+                                                            </td>
+                                                            <td class="col-sm-1 text-center td-vertical-align"
+                                                                ng-click="info(layer)"><i
+                                                                    class="glyphicon glyphicon-info-sign"></i></td>
+                                                            <td class="col-sm-1 td-vertical-align"
+                                                                ng-class="{'bk-green':layer.dist <= 0.1, 'bk-yellow' : (layer.dist > 0.1) && (layer.dist <= 0.3), 'bk-red': (layer.dist > 0.3) && (layer.dist <= 1), 'bk-white': (layer.dist > 1)}">
+                                                                &nbsp
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            </tbody>
+                                        </table>
 
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <p>Search for a layer</p>
-                                    <input class="form-control" layer-auto-complete environmental="true" contextual="true"
-                                           on-custom="add" placeholder="Select a layer by typing here">
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <p>Search for a layer</p>
+                                            <input class="form-control" layer-auto-complete environmental="true"
+                                                   contextual="true"
+                                                   on-custom="add" placeholder="Select a layer by typing here">
+                                        </div>
+                                    </div>
 
-                        <div class="row padding-top-5 margin-top-8">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <p>Predefined layer sets</p>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-default btn-xs" ng-repeat='x in predefinedLists'
-                                                ng-click="changeSelectedItem(x.value)">{{x.label}}</button>
+                                </div>
+
+                                <div class="row padding-top-5 margin-top-8">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <p>Predefined layer sets</p>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-default btn-xs"
+                                                        ng-repeat='x in predefinedLists'
+                                                        ng-click="changeSelectedItem(x.value)">{{x.label}}
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -157,21 +188,23 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <label>
-                            Number of layers selected - {{selection.layers.length}}
-                        </label> &nbsp;
-                        <button class="btn btn-xs btn-default" ng-click="clearSelection()" ng-disabled="selection.layers.length == 0" title="Clear selection"><i
-                                class="glyphicon glyphicon-remove"></i> Clear
-                        </button>
-                        <a class="btn btn-xs btn-default" download="layerList.txt"
-                           ng-href="{{exportUrl}}" ng-disabled="selection.layers.length == 0" title="Export selection">
-                            <i class="glyphicon glyphicon-download"></i> Export
-                        </a>
-                    </div>
-                </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <label>
+                    Number of layers selected - {{selection.layers.length}}
+                </label> &nbsp;
+                <button class="btn btn-xs btn-default" ng-click="clearSelection()"
+                        ng-disabled="selection.layers.length == 0" title="Clear selection"><i
+                        class="glyphicon glyphicon-remove"></i> Clear
+                </button>
+                <a class="btn btn-xs btn-default" download="layerList.txt"
+                   ng-href="{{exportUrl}}" ng-disabled="selection.layers.length == 0"
+                   title="Export selection">
+                    <i class="glyphicon glyphicon-download"></i> Export
+                </a>
             </div>
         </div>
     </div>

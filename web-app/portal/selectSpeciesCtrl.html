@@ -14,32 +14,13 @@
         <div class="panel-title">
             <div class="padding-bottom-15">
                 <p>Select species by choosing one of the following options</p>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-sm btn-default">
-                        <input checkbox-change type="radio" ng-model="speciesOption" value="allSpecies"
-                               ng-change="changeOption()" name="speciesOptions" autocomplete="off"/>All species
-                    </label>
-                    <label class="btn btn-sm btn-default active">
-                        <input checkbox-change type="radio" ng-model="speciesOption" value="searchSpecies"
-                               ng-change="changeOption()" autocomplete="off" name="speciesOptions">Search</input>
-                    </label>
-                    <label class="btn btn-default btn-sm">
-                        <input checkbox-change type="radio" ng-model="speciesOption" value="importList"
-                               ng-change="changeOption()" autocomplete="off" name="speciesOptions">Create a list</input>
-                    </label>
-                    <label class="btn btn-default btn-sm">
-                        <input checkbox-change type="radio" ng-model="speciesOption" value="speciesList"
-                               ng-change="changeOption()" autocomplete="off" name="speciesOptions">Select a list</input>
-                    </label>
-                    <label class="btn btn-default btn-sm">
-                        <input checkbox-change type="radio" ng-model="speciesOption" value="importPoints"
-                               ng-change="changeOption()" autocomplete="off" name="speciesOptions">Import points</input>
-                    </label>
-                    <label class="btn btn-default btn-sm">
-                        <input checkbox-change type="radio" ng-model="speciesOption" value="sandboxPoints"
-                               ng-change="changeOption()" autocomplete="off" name="speciesOptions">Use imported
-                        points</input>
-                    </label>
+                <div class="btn-group">
+                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'allSpecies'" ng-change="changeOption()">All species</label>
+                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'searchSpecies'" ng-change="changeOption()">Search</label>
+                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'importList'" ng-change="changeOption()">Create a list</label>
+                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'speciesList'" ng-change="changeOption()">Select a list</label>
+                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'importPoints'" ng-change="changeOption()">Import points</label>
+                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'sandboxPoints'" ng-change="changeOption()">Use imported points</label>
                 </div>
             </div>
         </div>
@@ -112,14 +93,14 @@
                 <label>Additional search options</label>
                 <div class="row">
                     <div class="col-sm-12">
-                        <label><input type="checkbox" ng-model="spatiallyValid">Add spatially-valid
-                            records</label>
+                        <label><small><input type="checkbox" ng-model="spatiallyValid">Add spatially-valid
+                            records</small></label>
                         &nbsp;
-                        <label><input type="checkbox" ng-model="spatiallySuspect">Add spatially-suspect records</label>
+                        <label><small><input type="checkbox" ng-model="spatiallySuspect">Add spatially-suspect records</small></label>
                         &nbsp;
-                        <label><input type="checkbox" ng-model="includeExpertDistributions">Add expert
+                        <label><small><input type="checkbox" ng-model="includeExpertDistributions">Add expert
                             distribution
-                            areas</label>
+                            areas</small></label>
                     </div>
                 </div>
             </div>
