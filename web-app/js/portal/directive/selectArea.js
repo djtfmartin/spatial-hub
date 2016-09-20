@@ -5,14 +5,7 @@
             '$rootScope', function ($http, MapService, PredefinedAreasService, $rootScope) {
 
                 return {
-                    template: '<div><div ng-repeat="x in layerAreas" >\
-                                    <input type="radio" ng-model="selectedArea.area" \
-                                        ng-value="x" name="selectedArea">{{x.name}}<br/>\
-                                </div><div ng-repeat="x in defaultAreas">\
-                                    <input type="radio" ng-model="selectedArea.area" \
-                                        ng-value="x" name="selectedArea">{{x.name}}<br/>\
-                                </div>\
-                                </div>',
+                    templateUrl: 'portal/' + 'selectArea.html',
                     scope: {
                         custom: '&onCustom',
                         selectedArea: '=selectedArea',

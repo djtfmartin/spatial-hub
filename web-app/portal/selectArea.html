@@ -1,0 +1,27 @@
+<div class="panel-heading">Select an area</div>
+<div class="panel-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span ng-show="layerAreas.length != 0">My area</span>
+                <div ng-repeat="x in layerAreas" class="radio">
+                    <label>
+                        <input type="radio" ng-model="selectedArea.area"
+                               ng-value="x" name="selectedArea"> {{x.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span>Predefined area</span>
+                <div ng-repeat="x in defaultAreas" class="radio">
+                    <label>
+                        <input type="radio" ng-model="selectedArea.area"
+                               ng-value="x" name="selectedArea"> {{x.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

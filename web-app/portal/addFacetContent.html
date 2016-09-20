@@ -1,52 +1,116 @@
 <div class="modal-header">
-    <h4 class="modal-title">Add Species</h4>
+    <h4 class="modal-title">Add Facet</h4>
 </div>
 
 <div class="modal-body">
-    <div>
-        <form class="form-horizontal">
-            <span>{{sel}}</span>
+    <div class="panel panel-default">
+        <div select-area on-custom="setArea" selected-area="selectedArea" ng-show="step == '1'"></div>
 
-            <div ng-show="step == '1'">
-                <div select-area on-custom="setArea" selected-area="selectedArea"></div>
+        <div ng-show="step == '2'">
+            <div class="panel-heading">
+                Select Facet
             </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div class="row padding-bottom-5">
+                        <label class="col-sm-4">Choose a facet</label>
+                        <div class="col-sm-8 pull-right">
+                            <select id='facet' ng-model="facet"
+                                    ng-change="resetFacet()" class="form-control pull-right">
+                                <option ng-repeat="x in facets" value="{{x.facet}}"
+                                        ng-disabled="{{x.separator}}">
+                                    {{x.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row padding-bottom-5">
+                        <div class="col-sm-12">
+                            <table class="col-sm-12">
+                                <caption>
+                                    <div class="row">
+                                        <div class="col-sm-6 margin-top-8">
+                                            Facet values
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" ng-model="facetFilter"
+                                                       placeholder="Filter (case sensitive)"/>
+                                                <div class="input-group-addon btn btn-default"
+                                                     ng-click="offset = 0; updateFacet()"><i class="fa fa-search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th class="col-sm-1"></th>
+                                    <th class="col-sm-6">Name</th>
+                                    <th class="col-sm-5">Count</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="3">
+                                        <div style="height:200px;overflow-y:auto;">
+                                            <table class="table">
+                                                <tr ng-repeat="x in facetList">
+                                                    <td class="col-sm-1"><input type="checkbox" ng-model="x.selected"
+                                                                                ng-change="updateSelection()"></td>
+                                                    <td class="col-sm-6">{{x.label}}</td>
+                                                    <td class="col-sm-5">{{x.count}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <button ng-click="previousPage()" class="btn btn-xs btn-default"
+                                                    type="button" ng-disabled="offset == 0"><i
+                                                    class="glyphicon glyphicon-arrow-left"></i></button>
+                                            <div class="btn btn-xs btn-default">Page {{(offset / pageSize) + 1}} of
+                                                {{maxPages}}
+                                            </div>
+                                            <button ng-click="nextPage()" class="btn btn-xs btn-default" type="button"
+                                                    ng-disabled="offset + pageSize >= max"><i
+                                                    class="glyphicon glyphicon-arrow-right"></i></button>
+                                        </div>
 
-            <div ng-show="step == '2'">
-                <div>
-                    <label style=";width:70px">Facet</label>
-                    <select style=";width:300px" id='facet' ng-model="facet"
-                            ng-change="resetFacet()">
-                        <option ng-repeat="x in facets" value="{{x.facet}}"
-                                ng-disabled="{{x.separator}}">
-                            {{x.name}}
-                        </option>
-                    </select>
+                                        <button ng-click="applySelection(); updateSel();" class="btn btn-xs btn-default"
+                                        ><i class="glyphicon glyphicon-plus-sign"></i> Add selection
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-
-                <input style="width:200px" type="text" ng-model="facetFilter"/>
-                <button ng-click="offset = 0; updateFacet()" class="btn btn-xs btn-default"
-                        ng-disabled="facetFilter == ''">apply filter (case sensitive)
-                </button>
-                <button ng-click="clearFilter()" class="btn btn-xs btn-default"
-                        ng-disabled="facetFilter != ''">clear filter
-                </button>
-                <table class="table" style="width:370px;height:200px;overflow:scroll;display:block">
-                    <tr ng-repeat="x in facetList">
-                        <td style="width:20px"><input type="checkbox" ng-model="x.selected"
-                                                      ng-change="updateSelection()"></td>
-                        <td style="width:230px">{{x.label}}</td>
-                        <td style="width:100px">{{x.count}}</td>
-                        <td style="background-color:#{{formatColor(x)}};width:20px">&nbsp</td>
-                    </tr>
-                </table>
-                <button ng-click="previousPage()" class="btn btn-xs btn-default" ng-disabled="offset == 0"><</button>
-                <span>Page {{(offset / pageSize) + 1}} of {{maxPages}}</span>
-                <button ng-click="nextPage()" class="btn btn-xs btn-default" ng-disabled="offset + pageSize >= max">></button>
-
-                <button ng-click="clearSelection()" class="btn btn-xs btn-default">Clear selection</button>
             </div>
-
-        </form>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <label>
+                            Selected facet values:
+                        </label>
+                        <small>
+                            <strong>{{sel}}</strong>
+                            <strong ng-show="!sel">No facet values selected</strong>
+                        </small>
+                    </div>
+                    <div class="col-sm-2">
+                        <button ng-click="clearSelection()" class="btn btn-xs btn-default" title="Clear selection">
+                            <i class="glyphicon glyphicon-remove"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
