@@ -120,14 +120,9 @@
                 };
 
                 $scope.ok = function (data) {
-<<<<<<< HEAD
-                    if ($scope.stepsCurrent == 0) {
-                        var sNames = []
-=======
 
                     if ($scope.step == 0) {
      /*                   var sNames = []
->>>>>>> f40c99a90f54fdcb0654e3fcf59ec1ccb464ba19
 
                         for (k in $scope.cap[$scope.selectedCapability].input) {
                             var i = $scope.cap[$scope.selectedCapability].input[k]
