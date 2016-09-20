@@ -24,7 +24,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row padding-bottom-5">
+                    <div class="row padding-bottom-5" ng-show="facet">
                         <div class="col-sm-12">
                             <table class="col-sm-12">
                                 <caption>
@@ -58,8 +58,8 @@
                                                 <tr ng-repeat="x in facetList">
                                                     <td class="col-sm-1"><input type="checkbox" ng-model="x.selected"
                                                                                 ng-change="updateSelection()"></td>
-                                                    <td class="col-sm-6">{{x.label}}</td>
-                                                    <td class="col-sm-5">{{x.count}}</td>
+                                                    <td class="col-sm-6 table-text-ellipsis td-vertical-align" title="{{x.label}}">{{x.label}}</td>
+                                                    <td class="col-sm-5 td-vertical-align">{{x.count}}</td>
                                                 </tr>
                                             </table>
                                         </div>

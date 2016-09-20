@@ -23,7 +23,7 @@
                 $scope.sel = ''
 
                 $scope.selection = []
-                $scope.facet = {}
+                $scope.facet
                 $scope.facets = []
                 $scope.facetList = []
                 FacetAutoCompleteService.search("-*:*").then(function (data) {
