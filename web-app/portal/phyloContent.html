@@ -1,29 +1,32 @@
-<div class="modal-header">
-    <h3 class="modal-title">Phylogenetic Diversity</h3>
-</div>
-
 <div class="modal-body">
-    <div class="row">
-        <div class="col-md-4">
-            <ol class="stepList" style="margin-left:-20px;">
-                <li style="font-size:12px" ng-repeat="stepName in stepNames"><span>{{stepName}}&nbsp;</span><i
-                        class="glyphicon glyphicon-ok" ng-show="step > $index + 1"></i></li>
-            </ol>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="stepList list-inline text-center">
+                    <li ng-repeat="stepName in stepNames" title="{{stepName}}">
+                        <input type="radio" name="steps" disabled
+                               ng-checked="(step > $index) && ($index + 1 == step)">
+                    </li>
+                </ol>
+            </div>
         </div>
-        <div class="col-md-8">
-            <form class="form-horizontal">
+        <div class="row">
+            <div><span><h5>Step {{step}} of {{stepNames.length}}: Phylogenetic Diversity</h5></span></div>
+            <div class="panel panel-default">
+                <div class="panel-heading">{{stepNames[step - 1]}}</div>
                 <div ng-show="step == '1'">
-                    <div select-area on-custom="setArea" selected-area="selectedArea" multi="true"></div>
+                    <div select-area on-custom="setArea" selected-area="selectedArea" multi="true"
+                         class="panel-body"></div>
                 </div>
 
                 <div ng-show="step == '2'">
-                    <div select-phylo selected-phylo="selectedPhylo"></div>
+                    <div select-phylo selected-phylo="selectedPhylo" class="panel-body"></div>
                 </div>
 
                 <div ng-show="step == '3'">
-                    <div select-species on-custom="setQ" selected-q="selectedQ"></div>
+                    <div select-species on-custom="setQ" selected-q="selectedQ" class="panel-body"></div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

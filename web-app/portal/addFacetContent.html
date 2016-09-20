@@ -4,7 +4,13 @@
 
 <div class="modal-body">
     <div class="panel panel-default">
-        <div select-area on-custom="setArea" selected-area="selectedArea" ng-show="step == '1'"></div>
+        <div  ng-show="step == '1'">
+            <div class="panel-heading">
+                Select an area
+            </div>
+            <div select-area on-custom="setArea" selected-area="selectedArea" class="panel-body"></div>
+
+        </div>
 
         <div ng-show="step == '2'">
             <div class="panel-heading">

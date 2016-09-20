@@ -1,106 +1,124 @@
-<div class="panel panel-primary" ng-show="speciesLayers && speciesLayers.length">
-    <div class="panel-heading">
-        <h3 class="panel-title">Preselected layers</h3>
-    </div>
-    <div class="panel-body">
-        <div ng-repeat="layer in speciesLayers">
-            <input name="speciesOptions" checkbox-change  type="radio" ng-model="$parent.speciesOption" ng-value="layer.uid"
-                   ng-change="changeOption()">{{layer.name}}</input>
+<div class="panel-body">
+    <div class="panel panel-primary" ng-show="speciesLayers && speciesLayers.length">
+        <div class="panel-heading">
+            <h5 class="panel-title">Preselected layers</h5>
         </div>
-    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="panel-title">
-            <div class="padding-bottom-15">
-                <p>Select species by choosing one of the following options</p>
-                <div class="btn-group">
-                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'allSpecies'" ng-change="changeOption()">All species</label>
-                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'searchSpecies'" ng-change="changeOption()">Search</label>
-                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'importList'" ng-change="changeOption()">Create a list</label>
-                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'speciesList'" ng-change="changeOption()">Select a list</label>
-                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'importPoints'" ng-change="changeOption()">Import points</label>
-                    <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'sandboxPoints'" ng-change="changeOption()">Use imported points</label>
-                </div>
+        <div class="panel-body">
+            <div ng-repeat="layer in speciesLayers">
+                <input name="speciesOptions" checkbox-change type="radio" ng-model="$parent.speciesOption"
+                       ng-value="layer.uid"
+                       ng-change="changeOption()">{{layer.name}}</input>
             </div>
         </div>
     </div>
-    <div class="panel-body">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div ng-if="speciesOption == 'allSpecies'">
-                    <p>All species selected</p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <div class="padding-bottom-15">
+                    <h5>Select species by choosing one of the following options</h5>
+                    <div class="btn-group">
+                        <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'allSpecies'"
+                               ng-change="changeOption()">All species</label>
+                        <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'searchSpecies'"
+                               ng-change="changeOption()">Search</label>
+                        <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'importList'"
+                               ng-change="changeOption()">Create a list</label>
+                        <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'speciesList'"
+                               ng-change="changeOption()">Select a list</label>
+                        <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'importPoints'"
+                               ng-change="changeOption()">Import points</label>
+                        <label class="btn btn-sm btn-default" ng-model="speciesOption" uib-btn-radio="'sandboxPoints'"
+                               ng-change="changeOption()">Use imported points</label>
+                    </div>
                 </div>
-                <div ng-if="speciesOption == 'searchSpecies'" class="row">
-                    <div class="col-sm-12">
-                        <p for="speciesAutoComplete">Search species
-                            <small>(For example: "Macropus rufus" or "Red Kangaroo")</small>
-                        </p>
-                        <input class="col-sm-12" id="speciesAutoComplete" species-auto-complete
-                               on-custom="setQ" placeholder="Search here">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <label>
-                                    <input type="checkbox" ng-checked="useScientificNames">Use the scientific names
-                                    supplied with
-                                    the records
-                                </label>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div ng-if="speciesOption == 'allSpecies'">
+                        <p>All species selected</p>
+                    </div>
+                    <div ng-if="speciesOption == 'searchSpecies'" class="row">
+                        <div class="col-sm-12">
+                            <h5 for="speciesAutoComplete">Search species
+                                <small>(For example: "Macropus rufus" or "Red Kangaroo")</small>
+                            </h5>
+                            <input class="col-sm-12" id="speciesAutoComplete" species-auto-complete
+                                   on-custom="setQ" placeholder="Search here">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>
+                                        <input type="checkbox" ng-checked="useScientificNames"> Use the scientific names
+                                        supplied with
+                                        the records
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div ng-if="speciesOption == 'importList'">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <p>List: <b ng-bind="speciesListName ? speciesListName:'No list selected'"></b></p>
-                        </div>
-                        <div class="col-sm-4">
-                            <button class="btn btn-primary" ng-click="openSpeciesList()">
-                                Import species list
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div ng-if="speciesOption == 'speciesList'">
-                    <div lists-list on-custom="setQ"></div>
-
-                </div>
-                <div ng-if="speciesOption == 'importPoints'" style="margin-left:25px;margin-top:10px">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <p>Dataset: <b ng-bind="sandboxName ? sandboxName:'No dataset selected'"></b></p>
-                        </div>
-                        <div class="col-sm-4">
-                            <button class="btn btn-primary" ng-click="openSandbox()">
-                                Import points
-                            </button>
+                    <div ng-if="speciesOption == 'importList'">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <p>List: <b ng-bind="speciesListName ? speciesListName:'No list selected'"></b></p>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary" ng-click="openSpeciesList()">
+                                    Import species list
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div ng-if="speciesOption == 'speciesList'">
+                        <div lists-list on-custom="setQ"></div>
 
-                <div ng-if="speciesOption == 'sandboxPoints'">
-                    <div sandbox-list on-custom="setQ"></div>
+                    </div>
+                    <div ng-if="speciesOption == 'importPoints'" style="margin-left:25px;margin-top:10px">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <p>Dataset: <b ng-bind="sandboxName ? sandboxName:'No dataset selected'"></b></p>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary" ng-click="openSandbox()">
+                                    Import points
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div ng-if="speciesOption == 'sandboxPoints'">
+                        <div sandbox-list on-custom="setQ"></div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="panel-footer">
-        <div class="row">
-            <div class="col-sm-12">
-                <label>Additional search options</label>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <label><small><input type="checkbox" ng-model="spatiallyValid">Add spatially-valid
-                            records</small></label>
-                        &nbsp;
-                        <label><small><input type="checkbox" ng-model="spatiallySuspect">Add spatially-suspect records</small></label>
-                        &nbsp;
-                        <label><small><input type="checkbox" ng-model="includeExpertDistributions">Add expert
-                            distribution
-                            areas</small></label>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>Additional search options</label>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>
+                                <small><input type="checkbox" ng-model="spatiallyValid"> Add spatially-valid
+                                    records
+                                </small>
+                            </label>
+                            &nbsp;
+                            <label>
+                                <small><input type="checkbox" ng-model="spatiallySuspect"> Add spatially-suspect records
+                                </small>
+                            </label>
+                            &nbsp;
+                            <label>
+                                <small><input type="checkbox" ng-model="includeExpertDistributions"> Add expert
+                                    distribution
+                                    areas
+                                </small>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

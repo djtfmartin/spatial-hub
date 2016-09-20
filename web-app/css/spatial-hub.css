@@ -316,6 +316,10 @@ img.ala-layer-type-icon {
 }
 /** select layer END **/
 
-.padding-bottom-5{
+.padding-bottom-5 {
     padding-bottom: 5px;
+}
+
+ol.stepList li input[type=radio]:disabled{
+    cursor: inherit;
 }

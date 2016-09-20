@@ -3,13 +3,9 @@
 </div>
 
 <div class="modal-body">
-    <div>
-        <form class="form-horizontal">
-            <div ng-show="step == '1'">
-                <div select-layers selected-layers="selectedLayers" min-count="min" max-count="max"
-                     mandatory="true"></div>
-            </div>
-        </form>
+    <div ng-show="step == '1'" class="panel panel-default">
+        <div select-layers selected-layers="selectedLayers" min-count="min" max-count="max"
+             mandatory="true"></div>
     </div>
 </div>
 
