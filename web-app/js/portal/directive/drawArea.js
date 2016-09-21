@@ -1,9 +1,9 @@
 (function (angular) {
     'use strict';
-    angular.module('draw-area-directive', ['map-service', 'layers-service'])
-        .directive('drawArea', ['$rootScope', 'MapService', '$timeout', 'LayersService',
+    angular.module('draw-area-directive', ['map-service', 'layers-service', 'layout-service'])
+        .directive('drawArea', ['$rootScope', 'LayoutService', 'MapService', '$timeout', 'LayersService',
 
-            function ($rootScope, MapService, $timeout, LayersService) {
+            function ($rootScope, LayoutService, MapService, $timeout, LayersService) {
 
                 return {
                     scope: {
@@ -52,22 +52,22 @@
 
                         scope.cancel = function () {
                             // used by click info popup to check if click came while drawing polygon
-                            $rootScope.areaCtrlAreaValue = undefined;
+                            LayoutService.areaCtrlAreaValue = undefined;
                             
                             scope.deleteDrawing()
 
-                            $rootScope.closePanel()
+                            LayoutService.closePanel()
                         }
 
                         scope.ok = function (data) {
                             // used by click info popup to check if click came while drawing polygon
-                            $rootScope.areaCtrlAreaValue = undefined;
+                            LayoutService.areaCtrlAreaValue = undefined;
 
                             scope.addToMap()
 
                             scope.deleteDrawing()
 
-                            $rootScope.closePanel()
+                            LayoutService.closePanel()
                         }
 
                         scope.wkt

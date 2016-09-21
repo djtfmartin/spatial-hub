@@ -1,8 +1,7 @@
 (function (angular) {
     'use strict';
-    angular.module('export-map-ctrl', ['map-service', 'layers-service']).
-    controller('ExportMapCtrl', ['$scope', 'MapService', '$timeout', '$rootScope', '$uibModalInstance', '$http', 'LayersService',
-        function ($scope, MapService, $timeout, $rootScope, $uibModalInstance, $http, LayersService) {
+    angular.module('export-map-ctrl', ['map-service', 'layers-service']).controller('ExportMapCtrl', ['$scope', 'MapService', '$timeout', 'LayoutService', '$uibModalInstance', '$http', 'LayersService',
+        function ($scope, MapService, $timeout, LayoutService, $uibModalInstance, $http, LayersService) {
 
             $scope.name = 'ExportMapCtrl'
 
@@ -19,7 +18,7 @@
                     var i = MapService.leafletLayers[k]
                     var url = i.url
                     if (url.indexOf('?') < 0) url += '?'
-                    url += "&opacity=" + (i.opacity / 100.0)
+                    url += "&opacity=" + (i.opacity)
                     for (var j in i.layerParams) {
                         url += '&' + j + '=' + encodeURIComponent(i.layerParams[j])
                     }
