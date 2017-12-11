@@ -223,22 +223,21 @@
 
                 $scope.addPanoramioToMap = function () {
                     leafletData.getMap().then(function (map) {
-                        console.log("adding panoramio replacement");
+                        // console.log("adding panoramio replacement");
 
-                        $scope.test_extents = $('<div id="test_extents"></div>');
-                        $('.leaflet-control-mouseposition').parent().append($scope.test_extents);
-
-                        var bounds1 = map.getBounds().getWest() + "," + map.getBounds().getSouth() + "," + map.getBounds().getEast() + "," + map.getBounds().getNorth()
+                        // $scope.test_extents = $('<div id="test_extents"></div>');
+                        // $('.leaflet-control-mouseposition').parent().append($scope.test_extents);
 
                         var bounds = map.getBounds();
-                        var min = bounds.getSouthWest().wrap();
-                        var max = bounds.getNorthEast().wrap();
-                        var bbox = min.lng + "," + min.lat + ',' + max.lng + "," + max.lat;
+                        var bbox = bounds.getWest() + "," + bounds.getSouth() + "," + bounds.getEast() + "," + bounds.getNorth()
 
-                        console.log(bounds1);
-                        console.log(bbox);
-                        // console.log(bounds);
-                        $('#test_extents')[0].innerText = bbox;
+                        // var bounds = map.getBounds();
+                        // var min = bounds.getSouthWest().wrap();
+                        // var max = bounds.getNorthEast().wrap();
+                        // var bbox = min.lng + "," + min.lat + ',' + max.lng + "," + max.lat;
+
+                        console.log(bounds);
+                        // $('#test_extents')[0].innerText = bbox;
 
                         var popupHTML = function(photo){
                             var result = "";
@@ -279,54 +278,6 @@
                     })
                 };
 
-                $scope.addPanoramioToMapOld = function (context) {
-                    // var bbox = MapService.getExtents();
-                    var bounds = map.getBounds();
-                    var centerLat = bounds.getCenter().lat;
-                    console.debug("centerLat..." + centerLat);
-
-
-                    // var bounds = this.bounds.southWest.lng + "," + this.bounds.southWest.lat + "," + this.bounds.northEast.lng + "," + this.bounds.northEast.lat;
-                    var flickrURL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=4e53956eac74ec2d14b40dd0291e630e&extras=geo%2Curl_t%2Curl_s%2Curl_m%2Ctitle&format=json&nojsoncallback=1&text=landscape&per_page=10&bbox="
-                        + bounds;
-                    // var flickrURL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e6508d227f108431bd7fbfa5833375f5&user_id=56513965%40N06&tags=bikemap&extras=geo%2Curl_t%2Curl_s%2Curl_m%2Ctitle&format=json&nojsoncallback=1";
-
-                    var popupHTML = function(photo){
-                        var result = "";
-                        result = '<strong>'+photo.title+'</strong><br>';
-                        result += '<a href="'+photo.url_m+'" target="_blank">';
-                        result += '<img src="'+photo.url_s+'"></a>';      //was url_t; want url_s; can change to url_m if desired, but frame needs work
-                        result += '<br/><small>click image to enlarge in new tab</small>';
-                        return result;
-                    };
-
-                    $http.get(flickrURL).then(function (response) {
-                        console.log(response);
-                        var data = response.data;
-                        leafletData.getMap().then(function () {
-                            leafletData.getLayers().then(function (baselayers) {
-                                var drawnItems = baselayers.overlays.draw;
-                                // var layerGroup = new L.LayerGroup().addTo(map);
-                                for (var i = 0; i < data.photos.photo.length; i++) {
-                                    var photoContent = data.photos.photo[i];
-                                    var photoIcon = L.icon(
-                                        {
-                                            iconUrl: photoContent.url_t,
-                                            iconSize: [photoContent.width_t * 0.5, photoContent.height_t * 0.5]
-                                        }  //reduces thumbnails 50%
-                                    );
-                                    var marker = L.marker([photoContent.latitude, photoContent.longitude], {icon: photoIcon});
-                                    marker.bindPopup(popupHTML(photoContent));
-                                    drawnItems.addLayer(marker);
-                                }
-                            })
-                        })
-
-                    }, function (response) {
-                        console.error("error...");
-                    });
-                };
-
                 $scope.addPointsToMap = function (data) {
                     leafletData.getMap().then(function () {
                         leafletData.getLayers().then(function (baselayers) {
@@ -348,6 +299,7 @@
                         })
                     })
                 };
+
                 $scope.addWktToMap = function (data) {
                     $scope.deleteDrawing();
                     leafletData.getMap().then(function () {

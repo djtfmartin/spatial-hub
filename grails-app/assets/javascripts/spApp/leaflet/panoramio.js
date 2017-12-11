@@ -30,10 +30,6 @@ L.Control.Panoramio = L.Control.extend({
     },
 
     _toggle: function() {
-        // this._toggleTitle;
-        console.log("panoramio state: " + this.panoramioControl._panoramio_state) ;
-        console.log("panoramio title: " + this.panoramioControl.link.title) ;
-
         this.panoramioControl._panoramio_state = !this.panoramioControl._panoramio_state;
         this.panoramioControl.options.togglePanoramio(this);
 
@@ -44,12 +40,6 @@ L.Control.Panoramio = L.Control.extend({
             this.panoramioControl.link.title = this.panoramioControl.options.title;
             $(".icon-panoramio").removeClass("icon-exit-panoramio")
         }
-
-        // this.panoramioControl.options.togglePanoramio(this);
-        // this.panoramioControl._panoramio_state = !this.panoramioControl._panoramio_state
-        console.debug("after...");
-        console.log("panoramio state: " + this.panoramioControl._panoramio_state) ;
-        console.log("panoramio title: " + this.panoramioControl.link.title) ;
     }
 
 });
